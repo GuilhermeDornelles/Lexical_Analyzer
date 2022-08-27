@@ -25,35 +25,47 @@ def analyze():
 					else:
 						prev_token.lexema += str(char)
 			else:
-				# if char == ':':
-				# 	if not prev_token:
-				# 		prev_token = Token('ASSIGNOP', char, 12)
-				# else:
-				if prev_token:
-					print(prev_token)
-					prev_token = None
-				if char == '(':
-					print(Token('LPAR', char, 3))
+				if char == ':':
+					if prev_token:
+						print(prev_token)
+						prev_token = None
+					prev_token = Token('ASSIGNOP', char, 12)
+				elif char == '=':
+					if prev_token:
+						prev_token.lexema += str(char)
+						print(prev_token)
+						prev_token = None
+					else:
+						prev_token = Token('EQOP', char, 11)
+				else:
+					if prev_token:
+						print(prev_token)
+						prev_token = None
+					if char == '(':
+						print(Token('LPAR', char, 3))
 
-				if char == ')':
-					print(Token('RPAR', char, 4))
-				
-				if char == '+':
-					print(Token('ADDOP', char, 5))
-				
-				if char == '-':
-					print(Token('SUBOP', char, 6))
-				
-				if char == '*':
-					print(Token('MULOP', char, 7))
+					if char == ')':
+						print(Token('RPAR', char, 4))
+					
+					if char == '+':
+						print(Token('ADDOP', char, 5))
+					
+					if char == '-':
+						print(Token('SUBOP', char, 6))
+					
+					if char == '*':
+						print(Token('MULOP', char, 7))
 
-				if char == '/':
-					print(Token('DIVOP', char, 8))
+					if char == '/':
+						print(Token('DIVOP', char, 8))
 
-				if char == '>':
-					print(Token('LTOP', char, 9))
+					if char == '>':
+						print(Token('LTOP', char, 9))
 
-				if char == '<':
-					print(Token('STOP', char, 10))
+					if char == '<':
+						print(Token('STOP', char, 10))
+		if prev_token:
+			print(prev_token)
+			prev_token = None
 
 analyze()

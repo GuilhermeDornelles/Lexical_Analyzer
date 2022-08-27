@@ -12,4 +12,4 @@ class Token:
 		self.id = id
 
 	def __repr__(self):
-		return f"('{self.token}', {self.lexema}, {self.id})"
+		return f"('{self.lexema}', {self.token}, {self.id})"
