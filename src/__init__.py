@@ -1,15 +1,8 @@
-
-class Token:
-    def __init__(self, token, lexema, id):
-        self.token = token
-        self.lexema = lexema
-        self.id = id
-    
-    def __str__(self):
-        return f"('{self.token}', {self.lexema}, {self.id})"
+from utils import Token
 
 
 class Lexycal_analyzer:
+    
     def __init__(self, count_id=1):
         self.count_id = count_id
 
@@ -40,7 +33,7 @@ class Lexycal_analyzer:
                     words.append(currWord)
                     currWord = ""
             words.append(currWord.replace("\n", ""))
-        return set(words)
+        return words
 
 
             #Está considerando word como cada caractere, deve considerar word como cada palavra
@@ -51,8 +44,38 @@ class Lexycal_analyzer:
         tokens = []
         for i, word in enumerate(words):
             if str(word).isdigit():
-                token = Token(str(word), "int_num", i)
+                token = Token(str(word), "NUM", 1)
                 tokens.append(token)
+            else:
+                match word:
+                    case "(":
+                        token = Token(str(word), "LPAR", 3)
+                        tokens.append(token)
+                    case ")":
+                        token = Token(str(word), "RPAR", 4)
+                        tokens.append(token)
+                    case "+":
+                        token = Token(str(word), "ADDOP", 5)
+                        tokens.append(token)
+                    case "-":
+                        token = Token(str(word), "SUBOP", 6)
+                        tokens.append(token)
+                    case "*":
+                        token = Token(str(word), "MULOP", 7)
+                        tokens.append(token)
+                    case "/":
+                        token = Token(str(word), "DIVOP", 8)
+                        tokens.append(token)
+                    case "==":
+                        token = Token(str(word), "EQOP", 9)
+                        tokens.append(token)
+                    case ":=":
+                        token = Token(str(word), "ASSIGNOP", 10)
+                        tokens.append(token)                        
+                    case _:
+                        token = Token(str(word), "VAR", 2)
+                        tokens.append(token)
+
         return tokens
 
     def print_tokens(self, tokens):
@@ -65,7 +88,6 @@ class Lexycal_analyzer:
 def main():
     analyzer = Lexycal_analyzer()
     words = analyzer.analyze()
-    #print(words)
     tokens = analyzer.makeTokens(words)
     print(analyzer.print_tokens(tokens))
 
