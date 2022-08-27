@@ -1,3 +1,1 @@
-Testando
-A leitura
-de arquivos
+a := (aux - 1) * 100 / 20
